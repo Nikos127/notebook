@@ -10,7 +10,7 @@ h1 {
     flex-direction: column;
 }
 
-button{
+.input button{
     margin-top: 8px;
     margin-left: 70px;
     width: 200px;
