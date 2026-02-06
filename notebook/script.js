@@ -25,14 +25,12 @@ function renderTrashNotes() {
 }
 
 function getNoteTemplate(indexNote) {
-    return `<p>+ ${notesTitle[indexNote]} >> ${notes[indexNote]} <button onclick="toTrashNote(${indexNote})">X</button></p>
-</html>`
+    return `<p><b>${notesTitle[indexNote]}</b><br>${notes[indexNote]} </p><button onclick="toTrashNote(${indexNote})">Zum Papierkorb</button><div class="line"></div>`
 }
 
 function getTrashNoteTemplate(indexTrashNote) {
-    return `<p>+ ${trashNotesTitle[indexTrashNote]} >> ${trashNotes[indexTrashNote]} <button onclick="deleteNote(${indexTrashNote})">X</button></p>
-</html>`
-}
+    return `<p><b>${trashNotesTitle[indexTrashNote]}</b><br>${trashNotes[indexTrashNote]} <button onclick="deleteNote(${indexTrashNote})">Löschen</button></p><div class="line"></div>`
+}   
 
 function addNote() {
     let noteTitleInputRef = document.getElementById('note_title_input');
@@ -90,8 +88,8 @@ function getFromLocalStorage() {
 function toTrashNote(indexNote) {
     let trashNoteTitle = notesTitle.splice(indexNote, 1);
     let trashNote = notes.splice(indexNote, 1);
-    trashNotesTitle.push(trashNoteTitle);
-    trashNotes.push(trashNote);
+    trashNotesTitle.push(trashNoteTitle[0]);
+    trashNotes.push(trashNote[0]);
     
     saveToLocalStorage();
     saveTrashToLocalStorage();
