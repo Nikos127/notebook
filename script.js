@@ -1,7 +1,7 @@
 
-let notesTitle = [];
-let notes = [];
-let trashNotesTitle = [];
+let notesTitles = ['Aufgaben', 'Essen'];
+let notes = ['Lernen', 'Pizza bestellen'];
+let trashNotesTitles = [];
 let trashNotes = [];
 
 function renderNotes() {
@@ -42,12 +42,12 @@ function addNote() {
 }
 
 function saveToLocalStorage() {
-    localStorage.setItem('notesTitle', JSON.stringify(notesTitle));
+    localStorage.setItem('notesTitles', JSON.stringify(notesTitles));
     localStorage.setItem('notes', JSON.stringify(notes));
 }
 
 function saveTrashToLocalStorage() {
-    localStorage.setItem('trashNotesTitle', JSON.stringify(trashNotesTitle));
+    localStorage.setItem('trashNotesTitles', JSON.stringify(trashNotesTitles));
     localStorage.setItem('trashNotes', JSON.stringify(trashNotes));
 }
 
@@ -66,7 +66,7 @@ function getFromLocalStorage() {
     }
 
     if (arrTrashTitle) {
-        trashNotesTitle = arrTrashTitle;
+        trashNotesTitles = arrTrashTitle;
     }
 
     if (arrTitle) {
@@ -78,11 +78,11 @@ function getFromLocalStorage() {
 }
 
 function toTrashNote(indexNote) {
-    let trashNoteTitle = notesTitle.splice(indexNote, 1);
+    let trashNoteTitle = notesTitles.splice(indexNote, 1);
     let trashNote = notes.splice(indexNote, 1);
-    trashNotesTitle.push(trashNoteTitle[0]);
+    trashNotesTitles.push(trashNoteTitle[0]);
     trashNotes.push(trashNote[0]);
-    
+
     saveToLocalStorage();
     saveTrashToLocalStorage();
     renderNotes();
@@ -90,7 +90,7 @@ function toTrashNote(indexNote) {
 }
 
 function deleteNote(indexTrashNote) {
-    trashNotesTitle.splice(indexTrashNote,1);
+    trashNotesTitles.splice(indexTrashNote, 1);
     trashNotes.splice(indexTrashNote, 1);
     saveTrashToLocalStorage();
     renderTrashNotes();
