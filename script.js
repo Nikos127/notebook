@@ -19,6 +19,10 @@ function moveNote(indexNote, startKey, destinationKey) {
     allNotes[destinationKey + "Titles"].push(trashNoteTitle[0]);
 
 
+    renderAllNotes();
+}
+
+function renderAllNotes() {
     renderNotes();
     renderTrashNotes();
 }
@@ -96,21 +100,10 @@ function getFromLocalStorage() {
     renderTrashNotes();
 }
 
-function toTrashNote(indexNote) {
-    let trashNoteTitle = notesTitles.splice(indexNote, 1);
-    let trashNote = notes.splice(indexNote, 1);
-    trashNotesTitles.push(trashNoteTitle[0]);
-    trashNotes.push(trashNote[0]);
-
-    saveToLocalStorage();
-    saveTrashToLocalStorage();
-    renderNotes();
-    renderTrashNotes();
-}
-
 function deleteNote(indexTrashNote) {
-    trashNotesTitles.splice(indexTrashNote, 1);
-    trashNotes.splice(indexTrashNote, 1);
+    allNotes.trashNotes.splice(indexTrashNote, 1);
+    allNotes.trashNotesTitles.splice(indexTrashNote, 1);
+
     saveTrashToLocalStorage();
     renderTrashNotes();
 }
