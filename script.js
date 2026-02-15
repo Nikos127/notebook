@@ -4,12 +4,31 @@ let notes = ['Lernen', 'Pizza bestellen'];
 let trashNotesTitles = [];
 let trashNotes = [];
 
+let allNotes = {
+    'notesTitles': ['Aufgaben', 'Essen'],
+    'notes': ['Lernen', 'Pizza bestellen'],
+    'trashNotesTitles': [],
+    'trashNotes': []
+};
+
+function moveNote(indexNote, startKey, destinationKey) {
+    let trashNote = allNotes[startKey].splice(indexNote, 1);
+    allNotes[destinationKey].push(trashNote[0]);
+
+    let trashNoteTitle = allNotes[startKey + "Titles"].splice(indexNote, 1);
+    allNotes[destinationKey + "Titles"].push(trashNoteTitle[0]);
+
+
+    renderNotes();
+    renderTrashNotes();
+}
+
 function renderNotes() {
     let contentRef = document.getElementById("content");
     contentRef.innerHTML = "";
 
 
-    for (let indexNote = 0; indexNote < notes.length; indexNote++) {
+    for (let indexNote = 0; indexNote < allNotes.notes.length; indexNote++) {
         contentRef.innerHTML += getNoteTemplate(indexNote);
     }
 }
@@ -19,7 +38,7 @@ function renderTrashNotes() {
     trashContentRef.innerHTML = "";
 
 
-    for (let indexTrashNote = 0; indexTrashNote < trashNotes.length; indexTrashNote++) {
+    for (let indexTrashNote = 0; indexTrashNote < allNotes.trashNotes.length; indexTrashNote++) {
         trashContentRef.innerHTML += getTrashNoteTemplate(indexTrashNote);
     }
 }
